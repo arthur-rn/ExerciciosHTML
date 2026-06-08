@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFF - Programação Web: Imagens Responsivas e Semântica de Texto</title>
+    <!-- Tailwind CSS para Estilização Responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-mono-code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Custom scrollbar para simular IDE */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500/30 selection:text-emerald-200">
+
+    <!-- Cabeçalho Institucional IFF -->
+    <header class="bg-slate-900 border-b border-emerald-800/40 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-1 bg-emerald-950/80 border border-emerald-500/30 px-3 py-2 rounded-xl">
+                    <span class="w-3 h-7 bg-emerald-500 rounded-full inline-block"></span>
+                    <span class="w-3 h-5 bg-red-500 rounded-full inline-block"></span>
+                    <span class="w-3 h-7 bg-emerald-500 rounded-full inline-block"></span>
+                    <div class="text-left ml-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono-code block leading-none">IFF</span>
+                        <span class="text-[9px] text-slate-400 font-medium block mt-0.5 leading-none">BSI Campos</span>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-white tracking-tight">Laboratório de Frontend Estrutural</h1>
+                    <p class="text-xs text-slate-400">Imagens Responsivas, Formatos Modernos &bull; <span class="text-emerald-400">Prof. Ronaldo Amaral</span></p>
+                </div>
+            </div>
+            
+            <nav class="flex items-center gap-1 overflow-x-auto w-full md:w-auto py-1 justify-start md:justify-end scrollbar-none">
+                <button onclick="tab('teoria')" id="tab-btn-teoria" class="tab-button px-3 py-1.5 text-xs font-semibold rounded-lg transition-all bg-emerald-600 text-white shadow-lg shadow-emerald-900/20">
+                    Teoria &amp; Contexto
+                </button>
+                <button onclick="tab('simulador')" id="tab-btn-simulador" class="tab-button px-3 py-1.5 text-xs font-semibold rounded-lg transition-all text-slate-400 hover:text-white hover:bg-slate-800/50">
+                    Simulador Resolução
+                </button>
+                <button onclick="tab('laboratorio')" id="tab-btn-laboratorio" class="tab-button px-3 py-1.5 text-xs font-semibold rounded-lg transition-all text-slate-400 hover:text-white hover:bg-slate-800/50 flex items-center gap-1 border border-emerald-500/10">
+                    <i data-lucide="code" class="w-3.5 h-3.5 text-emerald-400 animate-pulse"></i> IDE Prática
+                </button>
+                <button onclick="tab('quiz')" id="tab-btn-quiz" class="tab-button px-3 py-1.5 text-xs font-semibold rounded-lg transition-all text-slate-400 hover:text-white hover:bg-slate-800/50">
+                    Simulado
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- CONTEÚDO 1: TEORIA & CONTEXTO -->
+        <section id="pane-teoria" class="tab-panel block space-y-8">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-400 font-mono-code">Módulo Avançado de Imagens e Texto</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2 mb-4 tracking-tight">Otimização de Mídias e Semântica Refinada</h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-4xl">
+                    Neste segundo laboratório da disciplina de <strong>Programação Web</strong>, avançamos do esqueleto estrutural de blocos para a otimização de ativos de mídia e legibilidade interna das strings textuais. Sistemas de Informação de alta escala exigem que as imagens se adaptem à banda de rede e à tela do dispositivo do cliente, economizando dados e acelerando o tempo de renderização (First Contentful Paint).
+                </p>
+            </div>
+
+            <!-- Principais conceitos em Cards de engenharia -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: <picture> -->
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                        <i data-lucide="image"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-base">Direção de Arte com &lt;picture&gt;</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Diferente do <code>&lt;img&gt;</code> simples, o elemento <code>&lt;picture&gt;</code> atua como uma estrutura condicional nativa. Permite carregar imagens diferentes dependendo de regras de media query no cliente (Ex: carregar imagem cortada na vertical para Mobile e imagem panorâmica para Desktop).
+                    </p>
+                </div>
+
+                <!-- Card 2: srcset e sizes -->
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-sky-950/80 border border-sky-500/20 flex items-center justify-center text-sky-400">
+                        <i data-lucide="shrink"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-base">Densidade com srcset &amp; sizes</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Ao fornecer o atributo <code>srcset</code> com diferentes resoluções (ex: <code>foto-1x.jpg 1x, foto-2x.jpg 2x</code> ou largura em pixels como <code>foto-small.jpg 400w</code>), o navegador calcula o tamanho da tela e a densidade de pixels física (Retina Displays) para baixar somente a imagem exata.
+                    </p>
+                </div>
+
+                <!-- Card 3: Formatos de Próxima Geração -->
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-base">WebP e AVIF com Fallbacks</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Formatos modernos como <code>AVIF</code> e <code>WebP</code> reduzem em até 50% a 80% o peso do arquivo mantendo a fidelidade visual. Através de fontes empilhadas no <code>&lt;picture&gt;</code>, entregamos esses formatos aos navegadores compatíveis e mantemos o JPG tradicional de fallback.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bloco de Código Explicador de Imagens Responsivas -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i data-lucide="terminal" class="text-emerald-400"></i>
+                    Anatomia de um Ativo de Mídia Semântico Padrão Ouro
+                </h3>
+                <p class="text-xs text-slate-300">
+                    Para associar uma legenda ou explicação técnica a uma imagem ou bloco de código, a especificação do HTML5 impõe o empacotamento com a dupla <code>&lt;figure&gt;</code> e <code>&lt;figcaption&gt;</code>. Veja como implementar o fallback de mídias modernas de forma robusta:
+                </p>
+                
+                <div class="bg-slate-950 border border-slate-850 rounded-xl p-4 overflow-x-auto">
+                    <pre class="text-xs text-blue-400 font-mono-code leading-relaxed">
+<span class="text-slate-500">&lt;!-- Semântica estrutural para agrupamento de ilustração --&gt;</span>
+<span class="text-emerald-400">&lt;figure&gt;</span>
+    <span class="text-purple-400">&lt;picture&gt;</span>
+        <span class="text-slate-500">&lt;!-- 1. Primeira escolha: Formato AVIF de altíssima performance para telas grandes --&gt;</span>
+        &lt;source <span class="text-sky-400">srcset</span>=<span class="text-amber-300">"banner-desktop.avif"</span> <span class="text-sky-400">media</span>=<span class="text-amber-300">"(min-width: 1024px)"</span> <span class="text-sky-400">type</span>=<span class="text-amber-300">"image/avif"</span>&gt;
+        
+        <span class="text-slate-500">&lt;!-- 2. Segunda escolha: Formato WebP eficiente para telas menores (mobile/tablet) --&gt;</span>
+        &lt;source <span class="text-sky-400">srcset</span>=<span class="text-amber-300">"banner-mobile.webp"</span> <span class="text-sky-400">media</span>=<span class="text-amber-300">"(max-width: 1023px)"</span> <span class="text-sky-400">type</span>=<span class="text-amber-300">"image/webp"</span>&gt;
+        
+        <span class="text-slate-500">&lt;!-- 3. Fallback obrigatório: Imagem JPG padrão para navegadores antigos ou legados --&gt;</span>
+        &lt;img <span class="text-sky-400">src</span>=<span class="text-amber-300">"banner-fallback.jpg"</span> <span class="text-sky-400">alt</span>=<span class="text-amber-300">"Novo rack de servidores IBM do campus Campos Centro"</span> <span class="text-sky-400">loading</span>=<span class="text-amber-300">"lazy"</span>&gt;
+    <span class="text-purple-400">&lt;/picture&gt;</span>
+    
+    <span class="text-slate-500">&lt;!-- Legenda contextual associada diretamente à figura acima --&gt;</span>
+    <span class="text-emerald-400">&lt;figcaption&gt;</span>Figura 1.1: Detalhe físico da infraestrutura instalada no laboratório do IFF.<span class="text-emerald-400">&lt;/figcaption&gt;</span>
+<span class="text-emerald-400">&lt;/figure&gt;</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTEÚDO 2: SIMULADOR DE RESOLUÇÃO VISUAL -->
+        <section id="pane-simulador" class="tab-panel hidden space-y-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                <h3 class="text-lg font-bold text-white mb-2">Simulador de Download de Ativos Baseado em Resolução</h3>
+                <p class="text-xs text-slate-400">Redimensione a largura simulada do viewport para observar qual arquivo de imagem o motor do navegador escolheria carregar. Isso demonstra na prática como as regras de <code>media queries</code> e formatos de fallback economizam banda de internet móvel no dia a dia dos sistemas de informação.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Área de Simulação de Viewport -->
+                <div class="lg:col-span-8 bg-slate-950 border border-slate-850 p-6 rounded-2xl space-y-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-slate-900 pb-4 mb-4">
+                            <span class="text-xs text-slate-500 uppercase tracking-widest font-mono-code">Visualizador do Cliente</span>
+                            
+                            <!-- Dimensões ativas -->
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-emerald-400 font-mono-code font-bold">
+                                    Largura: <span id="sim-width-display">1200px</span>
+                                </span>
+                                <span id="sim-device-badge" class="text-[10px] uppercase font-bold px-2 py-1 bg-emerald-950 text-emerald-400 rounded">Desktop</span>
+                            </div>
+                        </div>
+
+                        <!-- Barra de ajuste da largura do simulador -->
+                        <div class="space-y-2">
+                            <label class="block text-xs text-slate-400 font-semibold flex justify-between">
+                                <span>Ajustar largura do dispositivo simulado:</span>
+                                <span class="font-mono-code text-slate-500">Arraste para alterar a largura do ecrã</span>
+                            </label>
+                            <input type="range" id="sim-slider-width" min="320" max="1400" value="1200" oninput="handleSimulateResize()" class="w-full accent-emerald-500 bg-slate-900 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Botões de atalhos rápidos de dispositivos -->
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <button onclick="setSimWidth(375, 'Celular (Mobile)')" class="bg-slate-900 hover:bg-slate-850 text-slate-300 px-3 py-1.5 rounded-lg text-xs border border-slate-800 hover:border-slate-700 transition-all flex items-center gap-1.5">
+                                <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> iPhone SE (375px)
+                            </button>
+                            <button onclick="setSimWidth(768, 'Tablet')" class="bg-slate-900 hover:bg-slate-850 text-slate-300 px-3 py-1.5 rounded-lg text-xs border border-slate-800 hover:border-slate-700 transition-all flex items-center gap-1.5">
+                                <i data-lucide="tablet" class="w-3.5 h-3.5"></i> iPad Air (768px)
+                            </button>
+                            <button onclick="setSimWidth(1024, 'Laptop / Desktop')" class="bg-slate-900 hover:bg-slate-850 text-slate-300 px-3 py-1.5 rounded-lg text-xs border border-slate-800 hover:border-slate-700 transition-all flex items-center gap-1.5">
+                                <i data-lucide="monitor" class="w-3.5 h-3.5"></i> Desktop Padrão (1024px)
+                            </button>
+                            <button onclick="setSimWidth(1366, 'Tela de Alta Resolução')" class="bg-slate-900 hover:bg-slate-850 text-slate-300 px-3 py-1.5 rounded-lg text-xs border border-slate-800 hover:border-slate-700 transition-all flex items-center gap-1.5">
+                                <i data-lucide="tv" class="w-3.5 h-3.5"></i> Monitor Ultrawide (1366px)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Representação Gráfica da Imagem Simulada Carregada -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden p-4 relative" id="sim-visual-container">
+                        <div class="h-64 rounded-xl flex flex-col items-center justify-center text-center p-6 transition-all duration-300 bg-cover bg-center border border-dashed border-slate-800" id="sim-graphic-box">
+                            <div class="bg-slate-950/90 border border-slate-800 p-4 rounded-xl backdrop-blur-sm space-y-2 max-w-sm">
+                                <i id="sim-file-icon" data-lucide="image" class="w-8 h-8 text-emerald-400 mx-auto"></i>
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-mono-code block">Arquivo Ativo Solicitado</span>
+                                <h4 id="sim-file-name" class="font-bold text-white text-sm font-mono-code">banner-desktop.avif</h4>
+                                <p id="sim-file-size" class="text-xs text-emerald-400 font-mono-code">Tamanho estimado: 42 KB (AVIF)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel Lateral de Decisão da Engine -->
+                <div class="lg:col-span-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-white text-md border-b border-slate-800 pb-3 flex items-center gap-2">
+                            <i data-lucide="cpu" class="w-5 h-5 text-emerald-500"></i>
+                            Algoritmo de Decisão do Navegador
+                        </h4>
+
+                        <div class="space-y-3">
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-850 space-y-1">
+                                <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest font-mono-code block">Regra Ativa Aplicada</span>
+                                <p class="text-xs text-slate-300 font-semibold" id="sim-decision-rule">min-width: 1024px</p>
+                            </div>
+
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-850 space-y-1">
+                                <span class="text-[9px] font-bold text-sky-400 uppercase tracking-widest font-mono-code block">Formato Preferencial do Browser</span>
+                                <p class="text-xs text-slate-300 leading-normal" id="sim-decision-format">AVIF (Maior grau de compressão mantendo fidelidade de cores, ideal para desktops de alta banda ou mobile limitado).</p>
+                            </div>
+
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-850 space-y-1">
+                                <span class="text-[9px] font-bold text-purple-400 uppercase tracking-widest font-mono-code block">Banda Salva Estimada (Economia de Rede)</span>
+                                <p class="text-xs text-emerald-400 font-bold font-mono-code" id="sim-decision-saving">84% de economia vs JPG tradicional</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 text-[10px] text-slate-400 leading-relaxed mt-4">
+                        <strong>Comentário do Prof. Ronaldo:</strong> Note que, ao redimensionar para larguras mobile, o navegador desiste de baixar a versão pesada de desktop e puxa apenas a imagem comprimida cortada para telas menores. Isso reduz o consumo de dados da rede 3G/4G/5G do seu usuário.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTEÚDO 3: LABORATÓRIO DE REFATORAÇÃO (IDE) -->
+        <section id="pane-laboratorio" class="tab-panel hidden space-y-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-400 font-mono-code">Exercício do Módulo A e C</span>
+                    <h3 class="text-xl font-bold text-white mt-1">IDE Interativa: Refatoração de Notícia com Mídia Responsiva</h3>
+                    <p class="text-xs text-slate-400 mt-1 leading-relaxed">Instrução: Modifique o código legado abaixo substituindo as tags antigas de negrito/itálico pelas semânticas recomendadas, e refatore a tag de imagem comum de modo a adotar o padrão responsivo multi-formatos com o elemento <code>&lt;picture&gt;</code>, além de associar a legenda corretamente com o contêiner de ilustração semântica. Ao finalizar, rode os testes automatizados!</p>
+                </div>
+                <div class="flex gap-2 w-full md:w-auto">
+                    <button onclick="restoreCodeLab()" class="flex-1 md:flex-none bg-slate-800 hover:bg-slate-700 text-white font-medium text-xs py-2 px-3 rounded-xl transition-all">
+                        Reiniciar Código
+                    </button>
+                    <button onclick="runHtmlTestsSuite()" class="flex-1 md:flex-none bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2 px-4 rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950">
+                        <i data-lucide="play" class="w-3.5 h-3.5 fill-current animate-pulse"></i> Rodar Validador
+                    </button>
+                </div>
+            </div>
+
+            <!-- Editor e Resultados dos Testes -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Editor de Código -->
+                <div class="lg:col-span-7 bg-[#0f172a] border border-slate-800 rounded-2xl overflow-hidden flex flex-col h-[550px] shadow-2xl">
+                    <div class="bg-slate-950 px-4 py-2.5 flex items-center justify-between border-b border-slate-850">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 bg-red-500 rounded-full inline-block"></span>
+                            <span class="w-3 h-3 bg-yellow-500 rounded-full inline-block"></span>
+                            <span class="w-3 h-3 bg-emerald-500 rounded-full inline-block"></span>
+                            <span class="text-xs font-mono-code text-slate-400 ml-2">galeria_noticias_bsi.html</span>
+                        </div>
+                        <span class="text-[9px] font-mono-code text-slate-500 uppercase font-bold tracking-widest">HTML5 &amp; Media Engine</span>
+                    </div>
+                    <textarea id="lab-textarea-code" class="flex-1 w-full bg-[#090d16] text-[#38bdf8] font-mono-code text-xs p-4 focus:outline-none focus:ring-0 resize-none leading-relaxed custom-scroll" spellcheck="false"></textarea>
+                </div>
+
+                <!-- Resultados de Testes -->
+                <div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col h-[550px] justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-4">
+                            <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
+                                Verificações Técnicas do IFF
+                            </h4>
+                            <span id="suite-score-badge" class="text-xs font-mono-code bg-slate-950 px-2 py-1 rounded-md text-slate-400 border border-slate-850">Score: 0 / 11</span>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-slate-950 rounded-full h-1.5 mb-6 border border-slate-850">
+                            <div id="suite-progress-inner" class="bg-emerald-500 h-1.5 rounded-full transition-all" style="width: 0%"></div>
+                        </div>
+
+                        <!-- Lista de Logs -->
+                        <div class="space-y-2.5 overflow-y-auto max-h-[350px] pr-1 custom-scroll" id="suite-log-holder">
+                            <div class="flex items-start gap-3 bg-slate-950 p-3 rounded-xl border border-slate-850">
+                                <i data-lucide="info" class="w-4 h-4 text-sky-400 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-300">Pronto para Auditar</h5>
+                                    <p class="text-[10px] text-slate-400 mt-1 leading-normal">Utilize o editor de código ao lado para efetuar as modificações de ecrã e clique no botão verde de "Rodar Validador" para processar o feedback estrito do professor.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-850 text-[10px] text-slate-400 leading-normal flex gap-2 items-start mt-4">
+                        <i data-lucide="info" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                        <span>Este validador executa varreduras de árvore léxica utilizando seletores complexos no DOM virtual gerado do seu editor de texto puro.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTEÚDO 4: SIMULADO DE FIXAÇÃO -->
+        <section id="pane-quiz" class="tab-panel hidden space-y-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                <h3 class="text-xl font-bold text-white mb-2">Simulado de Diagnóstico Avançado</h3>
+                <p class="text-xs text-slate-400">Avalie os seus conhecimentos sobre imagens responsivas, direção de arte com <code>&lt;picture&gt;</code>, formatos modernos de imagem e tags semânticas inline antes do debate presencial conduzido pelo Prof. Ronaldo Amaral.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-5" id="simulado-questions-container">
+                <!-- Perguntas Injetadas via JS -->
+            </div>
+
+            <div class="max-w-3xl mx-auto pt-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <span id="quiz-status" class="text-xs font-mono-code text-slate-400">Aguardando preenchimento das alternativas...</span>
+                <button onclick="gradeQuizAnswers()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2 px-6 rounded-xl transition-all shadow-lg shadow-emerald-950">
+                    Submeter Respostas
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé Acadêmico Institucional -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-8 text-center text-xs text-slate-500 space-y-2 mt-auto">
+        <p>Instituto Federal de Educação, Ciência e Tecnologia Fluminense — Campus Campos Centro</p>
+        <p>Bacharelado em Sistemas de Informação &bull; Disciplina: Programação Web &bull; Prof. Ronaldo Amaral</p>
+        <p class="text-[10px] text-slate-600">&copy; 2026 IFF. Todos os direitos reservados. Flipped Classroom Platform.</p>
+    </footer>
+
+    <!-- Lógica de Processamento e Controle de Estado (JavaScript) -->
+    <script>
+        // Código legado inicial que os alunos herdam para a atividade prática
+        const legacyCodeExercise = `<!-- EXERCÍCIO: APLIQUE METADADOS, SEMÂNTICA DE IMAGEM RESPONSIVA E TEXTO INLINE -->
+<html>
+<head>
+    <title>galeria</title>
+</head>
+<body>
+    <div id="noticia-bsi">
+        <h1>Inauguração do Laboratório de Hardware do IFF</h1>
+        <p>Postado em: 01/06/2026 por Professor Ronaldo Amaral</p>
+
+        <!-- TAREFA: Refatorar este bloco de imagem desatualizado para usar o elemento <picture> moderno -->
+        <!-- Envolva a imagem e sua legenda com as tags semânticas de ilustração corretas -->
+        <img src="banner-servidor.jpg" width="1200" height="800" alt="foto">
+        <p class="legenda-foto">Foto do novo rack de servidores instalados no Laboratório do IFF.</p>
+
+        <p>A equipe técnica do IFF concluiu a infraestrutura de rede local. Para iniciar a auditoria, abra o terminal de linha de comando no seu computador e execute: <b>ping bsi.iff.edu.br</b>.</p>
+        
+        <p><i>Atenção:</i> Este procedimento é altamente recomendado para todos os alunos matriculados na disciplina de <i>Programação Web</i>.</p>
+    </div>
+</body>
+</html>`;
+
+        // Banco de Dados de Questões do Simulado
+        const quizDatabase = [
+            {
+                id: 1,
+                question: "1. No elemento &lt;picture> do HTML5, qual a utilidade do empilhamento de múltiplas tags &lt;source>?",
+                options: [
+                    "Apenas servir como caminhos alternativos caso a imagem principal caia ou seja deletada do servidor.",
+                    "Permitir que o navegador avalie ordenadamente atributos como 'type' e 'media' para carregar o formato mais leve e responsivo compatível com o navegador do cliente.",
+                    "Criptografar as mídias transmitidas em redes públicas contra ataques de interceptação.",
+                    "Executar rotações e edições visuais automáticas nas mídias diretamente no client-side."
+                ],
+                correct: 1,
+                explanation: "O empilhamento de tags &lt;source> permite o fornecimento de formatos modernos (AVIF, WebP) com fallbacks automáticos, onde o navegador varre as opções e escolhe a primeira opção que consegue decodificar e que atenda às media queries."
+            },
+            {
+                id: 2,
+                question: "2. Com relação aos atributos 'srcset' e 'sizes' da tag de imagem ou source, assinale a opção correta sobre sua importância técnica de Engenharia de Sistemas:",
+                options: [
+                    "Eles servem estritamente para alterar o zoom de foco das imagens em celulares.",
+                    "Eles permitem que o desenvolvedor crie links internos que se ancoram em partes específicas da imagem.",
+                    "Eles fornecem ao navegador uma lista de larguras físicas e caminhos de arquivos correspondentes, permitindo que o motor do browser calcule e carregue unicamente a menor resolução ideal de pixels com base na tela.",
+                    "Eles bloqueiam a imagem para download impedindo violações de direitos autorais."
+                ],
+                correct: 2,
+                explanation: "Ao declarar no 'srcset' as dimensões em pixels (ex: 400w, 800w) e no 'sizes' a estimativa de largura que a imagem ocupará na interface, o navegador calcula matematicamente qual resolução baixar com base no tamanho do display do cliente e densidade de pixels (Retina)."
+            },
+            {
+                id: 3,
+                question: "3. Por que as tags 'b' (bold) e 'i' (italic) estão sendo substituídas por 'strong' e 'em' no desenvolvimento moderno?",
+                options: [
+                    "Porque 'bold' e 'italic' foram banidas do protocolo HTTP por problemas de segurança.",
+                    "Porque 'b' e 'i' apenas forçam estilos visuais sem adicionar relevância lógica ou semântica para leitores de tela e motores de busca.",
+                    "Porque as novas tags consomem metade da memória cache local do navegador.",
+                    "Porque as tags antigas impedem que a página se adapte a dispositivos móveis."
+                ],
+                correct: 1,
+                explanation: "b e i são puramente estilísticas. No HTML5 moderno, buscamos a separação rigorosa de responsabilidades: o HTML cuida do significado lúdico do conteúdo (onde strong denota urgência/importância e em denota ênfase de leitura) e o CSS cuida da estética gráfica."
+            },
+            {
+                id: 4,
+                question: "4. Qual a relevância semântica de envolver data e hora utilizando a tag nativa &lt;time datetime='YYYY-MM-DD'>?",
+                options: [
+                    "Executar scripts que mostram um cronômetro ou contagem regressiva visual dinâmica.",
+                    "Forçar o navegador a formatar a data estritamente no padrão americano.",
+                    "Permitir que indexadores de conteúdo (Google) analisem com exatidão cronológica e cataloguem a atualidade de notícias ou agendem eventos automaticamente no calendário.",
+                    "Criptografar as informações cronológicas do banco de dados no lado do cliente."
+                ],
+                correct: 2,
+                explanation: "A tag <time> resolve o problema de diferentes notações humanas de escrita de datas. O atributo 'datetime' fornece um formato legível por máquina (ISO 8601), enriquecendo o SEO e a interpretação léxica por rastreadores."
+            },
+            {
+                id: 5,
+                question: "5. Para que serve a estrutura composta pelas tags &lt;figure> e &lt;figcaption> no HTML5?",
+                options: [
+                    "Criar contêineres de listas ordenadas animadas via CSS.",
+                    "Associar de forma semântica e explícita uma imagem, gráfico, diagrama ou bloco de código à sua legenda descritiva.",
+                    "Exibir barras de progresso durante o download de arquivos pesados.",
+                    "Navegar entre diferentes páginas da aplicação em arquitetura SPA."
+                ],
+                correct: 1,
+                explanation: "O elemento &lt;figure> agrupa uma unidade ilustrativa do documento de forma semântica, e o seu <figcaption> fornece o rótulo descritivo (legenda) unificado, sendo crucial para acessibilidade cognitiva e leitores de tela."
+            }
+        ];
+
+        // Alternação entre abas de conteúdo
+        function tab(paneId) {
+            document.querySelectorAll('.tab-panel').forEach(pane => {
+                pane.classList.add('hidden');
+                pane.classList.remove('block');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-900/20');
+                btn.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-800/50');
+            });
+
+            document.getElementById(`pane-${paneId}`).classList.remove('hidden');
+            document.getElementById(`pane-${paneId}`).classList.add('block');
+            
+            const activeBtn = document.getElementById(`tab-btn-${paneId}`);
+            activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800/50');
+            activeBtn.classList.add('bg-emerald-600', 'text-white', 'shadow-lg', 'shadow-emerald-900/20');
+        }
+
+        // Lógica de Redimensionamento do Simulador (Aba 2)
+        function handleSimulateResize() {
+            const width = document.getElementById('sim-slider-width').value;
+            setSimWidth(width);
+        }
+
+        function setSimWidth(width, deviceName) {
+            document.getElementById('sim-slider-width').value = width;
+            document.getElementById('sim-width-display').innerText = `${width}px`;
+            
+            const badge = document.getElementById('sim-device-badge');
+            const fileName = document.getElementById('sim-file-name');
+            const fileSize = document.getElementById('sim-file-size');
+            const fileIcon = document.getElementById('sim-file-icon');
+            const graphicBox = document.getElementById('sim-graphic-box');
+            const decisionRule = document.getElementById('sim-decision-rule');
+            const decisionFormat = document.getElementById('sim-decision-format');
+            const decisionSaving = document.getElementById('sim-decision-saving');
+
+            // Detalha comportamento dinâmico baseado na media query simulada
+            if (width < 640) {
+                badge.innerText = deviceName || "Mobile (Celular)";
+                badge.className = "text-[10px] uppercase font-bold px-2 py-1 bg-red-950 text-red-400 rounded";
+                fileName.innerText = "banner-mobile.webp";
+                fileSize.innerText = "Tamanho: 14 KB (WebP)";
+                decisionRule.innerText = "max-width: 639px";
+                decisionFormat.innerText = "Formato WebP (Alta compressão de pixel nativa para celulares de banda limitada).";
+                decisionSaving.innerText = "91% de economia de dados em redes 4G/5G";
+                // Simulação visual de cor
+                graphicBox.style.backgroundColor = "#2d1a1a";
+                graphicBox.style.backgroundImage = "none";
+            } else if (width >= 640 && width < 1024) {
+                badge.innerText = deviceName || "Tablet";
+                badge.className = "text-[10px] uppercase font-bold px-2 py-1 bg-sky-950 text-sky-400 rounded";
+                fileName.innerText = "banner-tablet.webp";
+                fileSize.innerText = "Tamanho: 28 KB (WebP)";
+                decisionRule.innerText = "min-width: 640px e max-width: 1023px";
+                decisionFormat.innerText = "Formato WebP (Configurado para se ajustar à largura média de displays móveis amplos).";
+                decisionSaving.innerText = "82% de economia de dados vs JPG bruto";
+                graphicBox.style.backgroundColor = "#1a252c";
+                graphicBox.style.backgroundImage = "none";
+            } else {
+                badge.innerText = deviceName || "Desktop";
+                badge.className = "text-[10px] uppercase font-bold px-2 py-1 bg-emerald-950 text-emerald-400 rounded";
+                fileName.innerText = "banner-desktop.avif";
+                fileSize.innerText = "Tamanho: 42 KB (AVIF)";
+                decisionRule.innerText = "min-width: 1024px";
+                decisionFormat.innerText = "Formato AVIF (Compressão de vanguarda com excelente controle de luminosidade de cores para monitores amplos).";
+                decisionSaving.innerText = "78% de economia em relação ao JPEG clássico";
+                graphicBox.style.backgroundColor = "#1a2c22";
+                graphicBox.style.backgroundImage = "none";
+            }
+        }
+
+        // Reseta e Carrega a IDE de Laboratório (Aba 3)
+        function restoreCodeLab() {
+            document.getElementById('lab-textarea-code').value = legacyCodeExercise;
+            document.getElementById('suite-score-badge').innerText = 'Score: 0 / 11';
+            document.getElementById('suite-progress-inner').style.width = '0%';
+            
+            document.getElementById('suite-log-holder').innerHTML = `
+                <div class="flex items-start gap-3 bg-slate-950 p-3 rounded-xl border border-slate-850">
+                    <i data-lucide="info" class="w-4 h-4 text-sky-400 shrink-0 mt-0.5"></i>
+                    <div>
+                        <h5 class="text-xs font-bold text-slate-300">Pronto para Auditar</h5>
+                        <p class="text-[10px] text-slate-400 mt-1 leading-normal">Utilize o editor de código ao lado para efetuar as modificações de ecrã e clique no botão verde de "Rodar Validador" para processar o feedback estrito do professor.</p>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // Suíte de Testes Automatizados para a IDE
+        function runHtmlTestsSuite() {
+            const codeText = document.getElementById('lab-textarea-code').value;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(codeText, 'text/html');
+            
+            let passedCount = 0;
+            const totalTests = 11;
+            const testLogs = [];
+
+            function assert(status, title, feedback) {
+                if (status) passedCount++;
+                testLogs.push({ status, title, feedback });
+            }
+
+            // Teste 1: Doctype
+            const checkDoctype = codeText.trim().toLowerCase().startsWith('<!doctype html>');
+            assert(checkDoctype, "Declaração de DOCTYPE HTML5", "Sua página deve iniciar estritamente com <!DOCTYPE html> para definir o padrão de renderização correto para o navegador.");
+
+            // Teste 2: Idioma
+            const checkLanguage = doc.documentElement && doc.documentElement.getAttribute('lang')?.toLowerCase() === 'pt-br';
+            assert(checkLanguage, "Idioma Declarado (lang='pt-BR')", "Define o português brasileiro como idioma do arquivo para que leitores de tela não pronunciem termos de forma incorreta.");
+
+            // Teste 3: Charset UTF-8
+            const checkCharset = doc.querySelector('meta[charset]')?.getAttribute('charset')?.toUpperCase() === 'UTF-8';
+            assert(checkCharset, "Mapeamento Charset UTF-8", "Evita erros gráficos de acentuação nos caracteres latinos em diferentes servidores.");
+
+            // Teste 4: Viewport
+            const checkViewport = !!doc.querySelector('meta[name="viewport"]');
+            assert(checkViewport, "Meta Viewport Responsiva", "Informa aos dispositivos móveis para que se adaptem nativamente ao tamanho físico de tela sem zoom forçado.");
+
+            // Teste 5: Título SEO descritivo
+            const titleEl = doc.querySelector('title');
+            const checkTitle = titleEl && titleEl.innerText !== 'galeria' && titleEl.innerText.trim().length > 5;
+            assert(checkTitle, "Título Descritivo de SEO", "O título não deve ser genérico como 'galeria' para que seu site ganhe relevância orgânica.");
+
+            // Teste 6: Tag de ilustração Figure
+            const figureEl = doc.querySelector('figure');
+            assert(!!figureEl, "Contêiner Semântico <figure>", "Deve envelopar o elemento de mídia responsiva e sua legenda textual correspondente.");
+
+            // Teste 7: Legenda figcaption
+            const figcaptionEl = doc.querySelector('figure figcaption');
+            assert(!!figcaptionEl, "Legenda Associada com <figcaption>", "A legenda do rack de servidores deve ser declarada especificamente com a tag <figcaption> aninhada diretamente no elemento <figure>.");
+
+            // Teste 8: Picture responsiva
+            const pictureEl = doc.querySelector('figure picture');
+            assert(!!pictureEl, "Elemento Condicional <picture>", "Para direção de arte e fallbacks de formatos, a imagem responsiva deve residir dentro do elemento <picture>.");
+
+            // Teste 9: Fallbacks WebP/AVIF com sources
+            const sourceEls = Array.from(doc.querySelectorAll('picture source'));
+            const hasModernFormats = sourceEls.some(s => s.getAttribute('type')?.includes('webp') || s.getAttribute('type')?.includes('avif'));
+            assert(hasModernFormats, "Fontes em formatos WebP ou AVIF", "Deve declarar pelo menos uma tag <source> apontando para os formatos WebP ou AVIF com o atributo type correto para otimização de banda.");
+
+            // Teste 10: Tags de texto inline semânticas (strong e code)
+            const codeEl = doc.querySelector('code');
+            const strongEl = doc.querySelector('strong');
+            // Alunos devem refatorar <b>ping bsi.iff.edu.br</b> para <code> e <i>Atenção:</i> para <strong>
+            assert(!!codeEl && !!strongEl, "Semântica Inline (strong e code)", "Substitua a tag obsoleta <b> no comando de terminal pela tag semântica <code>, e a tag <i> de atenção por <strong>.");
+
+            // Teste 11: Tag de tempo cronológica <time>
+            const timeEl = doc.querySelector('time');
+            const checkTimeAttr = timeEl && timeEl.getAttribute('datetime')?.startsWith('2026');
+            assert(checkTimeAttr, "Estruturação Cronológica com <time>", "Mapeie a data '01/06/2026' de forma legível para máquina utilizando a tag <time> com o atributo 'datetime' configurado adequadamente.");
+
+            // Atualização de Score e Progresso
+            document.getElementById('suite-score-badge').innerText = `Score: ${passedCount} / ${totalTests}`;
+            const pct = (passedCount / totalTests) * 100;
+            document.getElementById('suite-progress-inner').style.width = `${pct}%`;
+
+            // Desenha resultados no painel de logs
+            const holder = document.getElementById('suite-log-holder');
+            holder.innerHTML = '';
+
+            testLogs.forEach(log => {
+                const item = document.createElement('div');
+                item.className = `flex items-start gap-3 p-3 rounded-xl border transition-all ${
+                    log.status 
+                    ? 'bg-emerald-950/20 border-emerald-900/40 text-emerald-300' 
+                    : 'bg-red-950/20 border-red-900/40 text-red-300'
+                }`;
+                
+                item.innerHTML = `
+                    <i data-lucide="${log.status ? 'check' : 'x'}" class="w-4 h-4 shrink-0 mt-0.5 ${log.status ? 'text-emerald-400' : 'text-red-400'}"></i>
+                    <div>
+                        <h5 class="text-xs font-bold text-white">${log.title}</h5>
+                        <p class="text-[10px] text-slate-400 mt-1 leading-normal">${log.feedback}</p>
+                    </div>
+                `;
+                holder.appendChild(item);
+            });
+            lucide.createIcons();
+        }
+
+        // Constrói as Questões do Simulado (Aba 4)
+        function renderQuiz() {
+            const container = document.getElementById('simulado-questions-container');
+            container.innerHTML = '';
+
+            quizDatabase.forEach(q => {
+                const qBlock = document.createElement('div');
+                qBlock.className = 'bg-slate-900 border border-slate-850 p-6 rounded-2xl space-y-4';
+                qBlock.innerHTML = `
+                    <h4 class="font-bold text-white text-xs sm:text-sm">${q.question}</h4>
+                    <div class="space-y-2">
+                        ${q.options.map((opt, i) => `
+                            <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-850 hover:bg-slate-800 transition-all cursor-pointer text-xs">
+                                <input type="radio" name="sim-q-${q.id}" value="${i}" class="mt-0.5 text-emerald-600 focus:ring-emerald-500 shrink-0">
+                                <span class="text-slate-300 leading-normal">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="sim-explain-${q.id}" class="hidden p-3.5 rounded-xl text-xs leading-relaxed"></div>
+                `;
+                container.appendChild(qBlock);
+            });
+        }
+
+        // Corrige o Simulado de Diagnóstico
+        function gradeQuizAnswers() {
+            let score = 0;
+            let answeredAll = true;
+
+            quizDatabase.forEach(q => {
+                const selected = document.querySelector(`input[name="sim-q-${q.id}"]:checked`);
+                const explainDiv = document.getElementById(`sim-explain-${q.id}`);
+                
+                if (!selected) {
+                    answeredAll = false;
+                    return;
+                }
+
+                const answerIdx = parseInt(selected.value);
+                explainDiv.classList.remove('hidden');
+
+                if (answerIdx === q.correct) {
+                    score++;
+                    explainDiv.className = 'p-3.5 rounded-xl text-xs leading-relaxed bg-emerald-950/30 border border-emerald-900/40 text-emerald-300';
+                    explainDiv.innerHTML = `<strong>Correto!</strong> ${q.explanation}`;
+                } else {
+                    explainDiv.className = 'p-3.5 rounded-xl text-xs leading-relaxed bg-red-950/30 border border-red-900/40 text-red-300';
+                    explainDiv.innerHTML = `<strong>Incorreto.</strong> A alternativa correta é a opção ${q.correct + 1}. <br><span class="text-slate-300 block mt-1.5">${q.explanation}</span>`;
+                }
+            });
+
+            if (!answeredAll) {
+                alert("Por favor, selecione uma resposta para cada pergunta antes de enviar!");
+                return;
+            }
+
+            const status = document.getElementById('quiz-status');
+            status.innerText = `Resultado final: ${score} de ${quizDatabase.length} corretas (${(score / quizDatabase.length) * 100}%)`;
+            status.className = `text-xs font-bold font-mono-code ${score >= 4 ? 'text-emerald-400' : 'text-yellow-400'}`;
+        }
+
+        // Execuções ao Inicializar a Janela
+        window.onload = function() {
+            // Desenha Ícones Lucide
+            lucide.createIcons();
+            
+            // Inicia simulador
+            setSimWidth(1200);
+            
+            // Reseta IDE do laboratório
+            restoreCodeLab();
+            
+            // Desenha questões do Simulado
+            renderQuiz();
+        }
+    </script>
+</body>
+</html>
